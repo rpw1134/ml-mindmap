@@ -106,30 +106,31 @@
   height: 100%;
   width: 360px;
   background: var(--bg-surface);
-  border-left: 1px solid var(--border);
+  /* Left stripe encodes group membership — single visual anchor for color */
+  border-left: 3px solid var(--panel-accent, var(--border));
   overflow-y: auto;
   z-index: 20;
   display: flex;
   flex-direction: column;
-  animation: slideIn 0.18s ease-out;
+  animation: slideIn 0.2s ease-out;
 }
 
 @keyframes slideIn {
-  from { transform: translateX(20px); opacity: 0; }
+  from { transform: translateX(16px); opacity: 0; }
   to   { transform: translateX(0);    opacity: 1; }
 }
 
 .info-panel__close {
   position: absolute;
-  top: 14px;
-  right: 14px;
+  top: 16px;
+  right: 16px;
   background: none;
   border: none;
   color: var(--text-muted);
-  font-size: 22px;
+  font-size: 20px;
   line-height: 1;
   cursor: pointer;
-  padding: 2px 6px;
+  padding: 4px 8px;
   border-radius: 4px;
   transition: color 0.1s, background 0.1s;
 }
@@ -139,30 +140,50 @@
   background: var(--bg-raised);
 }
 
-/* Identity block: year → title → authors, tightly grouped */
+/* ── Header: meta-row → title → authors ── */
+
 .info-panel__header {
-  padding: 24px 20px 20px;
+  padding: 32px 24px 24px;
   border-bottom: 1px solid var(--border);
+}
+
+/* Group label (colored) + year (neutral) on one compact line */
+.info-panel__meta-row {
   display: flex;
-  flex-direction: column;
-  gap: 0;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.info-panel__group {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--panel-accent, var(--text-muted));
+}
+
+/* Bullet separator only when group is present */
+.info-panel__group + .info-panel__year::before {
+  content: '·';
+  margin-right: 6px;
+  color: var(--text-muted);
 }
 
 .info-panel__year {
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--accent);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  margin-bottom: 6px;
+  font-size: 12px;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
 }
 
+/* Title is the hero — largest, most prominent element */
 .info-panel__title {
-  font-size: 17px;
-  font-weight: 600;
+  font-size: 20px;
+  font-weight: 700;
   color: var(--text);
-  line-height: 1.4;
-  margin: 0 0 10px;
+  line-height: 1.35;
+  margin: 0 0 12px;
+  letter-spacing: -0.01em;
 }
 
 .info-panel__authors {
@@ -171,63 +192,71 @@
   line-height: 1.5;
 }
 
-/* Tags row */
+/* ── Tags ── */
+
 .info-panel__tags {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-  padding: 16px 20px;
+  padding: 18px 24px;
   border-bottom: 1px solid var(--border);
 }
 
 .info-panel__tag {
   font-size: 11px;
-  font-weight: 600;
+  font-weight: 500;
   padding: 3px 10px;
   border-radius: 100px;
-  color: #fff;
-  letter-spacing: 0.03em;
+  background: var(--bg-raised);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  letter-spacing: 0.01em;
 }
 
-/* Labelled section (Abstract) */
+/* ── Abstract ── */
+
 .info-panel__section {
-  padding: 20px 20px 0;
+  padding: 24px 24px 0;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
 }
 
 .info-panel__section-label {
   font-size: 10px;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--text-muted);
+  opacity: 0.6;
 }
 
 .info-panel__abstract {
   font-size: 13px;
   color: var(--text-muted);
-  line-height: 1.7;
+  line-height: 1.75;
   margin: 0;
 }
 
-/* Footer: arXiv link pinned to bottom */
+/* ── Footer ── */
+
 .info-panel__footer {
   margin-top: auto;
-  padding: 16px 20px;
+  padding: 20px 24px;
   border-top: 1px solid var(--border);
 }
 
 .info-panel__link {
   display: inline-flex;
   align-items: center;
+  gap: 4px;
   font-size: 13px;
   font-weight: 500;
   color: #818cf8;
   text-decoration: none;
+  transition: color 0.1s;
 }
 
 .info-panel__link:hover {
-  text-decoration: underline;
+  color: #a5b4fc;
 }
