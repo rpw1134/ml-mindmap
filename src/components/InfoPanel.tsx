@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import type { Paper } from '../types';
+import { getTagColor } from '../utils/tagColors';
 
 interface InfoPanelProps {
   paper: Paper | null;
@@ -33,7 +34,11 @@ export default function InfoPanel({ paper, onClose }: InfoPanelProps) {
       {paper.tags && paper.tags.length > 0 && (
         <div className="info-panel__tags">
           {paper.tags.map((tag) => (
-            <span key={tag} className="info-panel__tag">
+            <span
+              key={tag}
+              className="info-panel__tag"
+              style={{ backgroundColor: getTagColor(tag) }}
+            >
               {tag}
             </span>
           ))}

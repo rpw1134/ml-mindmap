@@ -71,14 +71,14 @@ const data: MindmapData = {
       label: 'Transformers',
       color: '#7c3aed',
       position: { x: 140, y: 80 },
-      size: { width: 560, height: 200 },
+      size: { width: 640, height: 200 }, // right edge 780 clears BERT (600 + 160 + 20 padding)
     },
     {
       id: 'g-embeddings',
       label: 'Embeddings',
       color: '#0ea5e9',
       position: { x: 140, y: 350 },
-      size: { width: 200, height: 200 },
+      size: { width: 240, height: 200 }, // right edge 380 clears word2vec (200 + 160 + 20 padding)
     },
   ],
 };
