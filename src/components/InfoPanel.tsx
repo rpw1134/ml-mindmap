@@ -8,7 +8,6 @@ interface InfoPanelProps {
 }
 
 export default function InfoPanel({ paper, onClose }: InfoPanelProps) {
-  // Close on Escape key
   useEffect(() => {
     function handleKey(e: KeyboardEvent) {
       if (e.key === 'Escape') onClose();
@@ -27,10 +26,14 @@ export default function InfoPanel({ paper, onClose }: InfoPanelProps) {
         ×
       </button>
 
-      <div className="info-panel__year">{paper.year}</div>
-      <h2 className="info-panel__title">{paper.title}</h2>
-      <div className="info-panel__authors">{paper.authors.join(', ')}</div>
+      {/* Identity block — year, title, authors are one tightly-grouped unit */}
+      <div className="info-panel__header">
+        <div className="info-panel__year">{paper.year}</div>
+        <h2 className="info-panel__title">{paper.title}</h2>
+        <div className="info-panel__authors">{paper.authors.join(', ')}</div>
+      </div>
 
+      {/* Tags sit in their own row, separated by the header's bottom border */}
       {paper.tags && paper.tags.length > 0 && (
         <div className="info-panel__tags">
           {paper.tags.map((tag) => (
@@ -45,17 +48,24 @@ export default function InfoPanel({ paper, onClose }: InfoPanelProps) {
         </div>
       )}
 
-      <p className="info-panel__abstract">{paper.abstract}</p>
+      {/* Abstract as a labelled section */}
+      <div className="info-panel__section">
+        <div className="info-panel__section-label">Abstract</div>
+        <p className="info-panel__abstract">{paper.abstract}</p>
+      </div>
 
+      {/* Footer link pushed to bottom */}
       {arXivUrl && (
-        <a
-          className="info-panel__link"
-          href={arXivUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          View on arXiv →
-        </a>
+        <div className="info-panel__footer">
+          <a
+            className="info-panel__link"
+            href={arXivUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            View on arXiv →
+          </a>
+        </div>
       )}
     </div>
   );
