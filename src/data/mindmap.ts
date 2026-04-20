@@ -11,6 +11,7 @@ const data: MindmapData = {
         'The dominant sequence transduction models are based on complex recurrent or convolutional neural networks that include an encoder and a decoder. The best performing models also connect the encoder and decoder through an attention mechanism. We propose a new simple network architecture, the Transformer, based solely on attention mechanisms, dispensing with recurrence and convolutions entirely. Experiments on two machine translation tasks show these models to be superior in quality while being more parallelizable and requiring significantly less time to train.',
       year: 2017,
       tags: ['attention', 'transformer', 'nlp'],
+      parentGroup: 'g-transformers',
       position: { x: 200, y: 150 },
     },
     {
@@ -22,6 +23,7 @@ const data: MindmapData = {
         'We introduce a new language representation model called BERT, which stands for Bidirectional Encoder Representations from Transformers. Unlike recent language representation models, BERT is designed to pre-train deep bidirectional representations from unlabeled text by jointly conditioning on both left and right context in all layers. As a result, the pre-trained BERT model can be fine-tuned with just one additional output layer to create state-of-the-art models for a wide range of tasks.',
       year: 2018,
       tags: ['pretraining', 'transformer', 'nlp'],
+      parentGroup: 'g-transformers',
       position: { x: 600, y: 150 },
     },
     {
@@ -44,6 +46,7 @@ const data: MindmapData = {
         'We propose two novel model architectures for computing continuous vector representations of words from very large data sets. The quality of these representations is measured in a word similarity task, and the results are compared to the previously best performing techniques based on different types of neural networks.',
       year: 2013,
       tags: ['embeddings', 'nlp', 'word2vec'],
+      parentGroup: 'g-embeddings',
       position: { x: 200, y: 420 },
     },
   ],

@@ -45,7 +45,7 @@
 
 .paper-node {
   background: var(--bg-surface);
-  border: 1px solid var(--border);
+  border: 1px solid color-mix(in srgb, var(--node-accent, #64748b) 35%, var(--border));
   border-radius: 6px;
   padding: 8px 10px;
   width: 160px;
@@ -54,8 +54,8 @@
 }
 
 .paper-node:hover {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 20%, transparent);
+  border-color: var(--node-accent, #64748b);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--node-accent, #64748b) 20%, transparent);
 }
 
 .paper-node__title {

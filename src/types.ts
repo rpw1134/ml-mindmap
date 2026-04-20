@@ -7,6 +7,7 @@ export interface Paper {
   year: number;
   url?: string;
   tags?: string[];
+  parentGroup?: string;          // id of the group this paper belongs to
   position: { x: number; y: number };
 }
 

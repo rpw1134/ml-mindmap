@@ -51,6 +51,14 @@ export default function MindMap() {
     [],
   );
 
+  // Build a lookup from group id → color for fast access in paper nodes
+  const groupColorMap = useMemo(
+    () => new Map((mindmapData.groups ?? []).map((g) => [g.id, g.color])),
+    [],
+  );
+
+  const DEFAULT_NODE_COLOR = '#64748b'; // slate-500 for ungrouped papers
+
   // Convert paper data → React Flow nodes
   const paperNodes: AnyNode[] = useMemo(
     () =>
@@ -58,10 +66,15 @@ export default function MindMap() {
         id: p.id,
         type: 'paper',
         position: p.position,
-        data: p,
+        data: {
+          ...p,
+          accentColor: p.parentGroup
+            ? (groupColorMap.get(p.parentGroup) ?? DEFAULT_NODE_COLOR)
+            : DEFAULT_NODE_COLOR,
+        },
         draggable: false,
       })),
-    [],
+    [groupColorMap],
   );
 
   const nodes: AnyNode[] = useMemo(
