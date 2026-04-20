@@ -46,9 +46,9 @@
 .paper-node {
   background: var(--bg-surface);
   border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 12px 14px;
-  width: 220px;
+  border-radius: 6px;
+  padding: 8px 10px;
+  width: 160px;
   cursor: pointer;
   transition: border-color 0.15s, box-shadow 0.15s;
 }
@@ -59,7 +59,7 @@
 }
 
 .paper-node__title {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 600;
   color: var(--text);
   line-height: 1.4;
@@ -67,28 +67,12 @@
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
 .paper-node__meta {
-  font-size: 11px;
-  color: var(--text-muted);
-  margin-bottom: 8px;
-}
-
-.paper-node__tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-}
-
-.paper-node__tag {
   font-size: 10px;
-  font-weight: 500;
-  padding: 2px 6px;
-  border-radius: 100px;
-  color: #fff;
-  opacity: 0.9;
+  color: var(--text-muted);
 }
 
 /* ─── Group node ──────────────────────────────────────────────── */

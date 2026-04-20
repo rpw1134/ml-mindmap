@@ -25,8 +25,10 @@ const nodeTypes = {
 export default function MindMap() {
   const [selectedPaper, setSelectedPaper] = useState<Paper | null>(null);
 
-  const handleSelect = useCallback((paper: Paper) => {
-    setSelectedPaper(paper);
+  const handleNodeClick = useCallback((_event: React.MouseEvent, node: AnyNode) => {
+    if (node.type === 'paper') {
+      setSelectedPaper(node.data as Paper);
+    }
   }, []);
 
   const handleClose = useCallback(() => {
@@ -42,7 +44,6 @@ export default function MindMap() {
         position: g.position,
         data: g,
         style: { width: g.size.width, height: g.size.height },
-        // zIndex -1 keeps groups behind paper nodes
         zIndex: -1,
         selectable: false,
         draggable: false,
@@ -50,17 +51,17 @@ export default function MindMap() {
     [],
   );
 
-  // Convert paper data → React Flow nodes, attaching the select handler
+  // Convert paper data → React Flow nodes
   const paperNodes: AnyNode[] = useMemo(
     () =>
       mindmapData.papers.map((p) => ({
         id: p.id,
         type: 'paper',
         position: p.position,
-        data: { ...p, onSelect: handleSelect },
+        data: p,
         draggable: false,
       })),
-    [handleSelect],
+    [],
   );
 
   const nodes: AnyNode[] = useMemo(
@@ -76,7 +77,6 @@ export default function MindMap() {
         source: e.source,
         target: e.target,
         label: e.label,
-        // Styling for optional labels
         labelStyle: { fill: '#94a3b8', fontSize: 11 },
         labelBgStyle: { fill: '#1e293b', fillOpacity: 0.8 },
         style: { stroke: '#475569', strokeWidth: 1.5 },
@@ -92,7 +92,7 @@ export default function MindMap() {
         nodeTypes={nodeTypes}
         nodesDraggable={false}
         nodesConnectable={false}
-        elementsSelectable={false}
+        onNodeClick={handleNodeClick}
         fitView
         fitViewOptions={{ padding: 0.15 }}
         colorMode="dark"
