@@ -49,6 +49,42 @@ const data: MindmapData = {
       parentGroup: 'g-embeddings',
       position: { x: 200, y: 420 },
     },
+    {
+      id: 'vae',
+      arxivId: '1312.6114',
+      title: 'Auto-Encoding Variational Bayes',
+      authors: ['Kingma', 'Welling'],
+      abstract:
+        'We introduce a stochastic variational inference and learning algorithm that scales to large datasets. By reparameterizing the variational lower bound, optimization through standard gradient methods becomes tractable. An approximate inference model (encoder) efficiently handles posterior inference for continuous latent variables alongside a generative model (decoder).',
+      year: 2013,
+      tags: ['vae', 'generative', 'latent-space', 'variational-inference'],
+      parentGroup: 'g-autoencoders',
+      position: { x: 1000, y: 150 },
+    },
+    {
+      id: 'vq-vae',
+      arxivId: '1711.00937',
+      title: 'Neural Discrete Representation Learning',
+      authors: ['van den Oord', 'Vinyals', 'Kavukcuoglu'],
+      abstract:
+        'We propose VQ-VAE, which learns discrete latent representations via vector quantization. Unlike standard VAEs that learn continuous codes, VQ-VAE circumvents posterior collapse by pairing a vector-quantized codebook with a learned autoregressive prior. The model demonstrates strong results on image, audio, and video generation.',
+      year: 2017,
+      tags: ['vq-vae', 'discrete-representation', 'generative', 'codebook'],
+      parentGroup: 'g-autoencoders',
+      position: { x: 1250, y: 150 },
+    },
+    {
+      id: 'figaro',
+      arxivId: '2201.10936',
+      title: 'FIGARO: Generating Symbolic Music with Fine-Grained Artistic Control',
+      authors: ['von Rütte', 'Biggio', 'Kilcher', 'Hofmann'],
+      abstract:
+        'We introduce FIGARO, a model for controllable symbolic music generation via a self-supervised description-to-sequence task. The model extracts high-level features from target sequences and learns the conditional distribution of sequences given those descriptions, combining learned and expert features. FIGARO achieves state-of-the-art results in symbolic music generation while generalizing beyond its training distribution.',
+      year: 2022,
+      tags: ['music-generation', 'symbolic-music', 'transformer', 'controllable-generation'],
+      parentGroup: 'g-music-generation',
+      position: { x: 1100, y: 420 },
+    },
   ],
   edges: [
     {
@@ -67,6 +103,16 @@ const data: MindmapData = {
       source: 'word2vec',
       target: 'bert',
     },
+    {
+      id: 'e-vae-vqvae',
+      source: 'vae',
+      target: 'vq-vae',
+    },
+    {
+      id: 'e-vqvae-figaro',
+      source: 'vq-vae',
+      target: 'figaro',
+    },
   ],
   groups: [
     {
@@ -82,6 +128,20 @@ const data: MindmapData = {
       color: '#0ea5e9',
       position: { x: 140, y: 350 },
       size: { width: 240, height: 200 }, // right edge 380 clears word2vec (200 + 160 + 20 padding)
+    },
+    {
+      id: 'g-autoencoders',
+      label: 'Autoencoders',
+      color: '#10b981',
+      position: { x: 940, y: 80 },
+      size: { width: 490, height: 200 }, // right edge 1430 clears VQ-VAE (1250 + 160 + 20 padding)
+    },
+    {
+      id: 'g-music-generation',
+      label: 'Music Generation',
+      color: '#f59e0b',
+      position: { x: 1040, y: 350 },
+      size: { width: 240, height: 200 }, // right edge 1280 clears FIGARO (1100 + 160 + 20 padding)
     },
   ],
 };
