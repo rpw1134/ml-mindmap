@@ -86,6 +86,18 @@ const data: MindmapData = {
       position: { x: 850, y: 420 },
     },
     {
+      id: 'pixel-rnn',
+      arxivId: '1601.06759',
+      title: 'Pixel Recurrent Neural Networks',
+      authors: ['van den Oord', 'Kalchbrenner', 'Kavukcuoglu'],
+      abstract:
+        'We model the discrete joint distribution of image pixels using a deep neural network that sequentially predicts each pixel along both spatial dimensions. The approach captures all dependencies between pixels while introducing fast two-dimensional recurrent layers with residual connections. The model achieves state-of-the-art log-likelihood on natural image benchmarks.',
+      year: 2016,
+      tags: ['rnn', 'generative', 'image-generation', 'autoregressive'],
+      parentGroup: 'g-rnns',
+      position: { x: 850, y: 620 },
+    },
+    {
       id: 'figaro',
       arxivId: '2201.10936',
       title: 'FIGARO: Generating Symbolic Music with Fine-Grained Artistic Control',
@@ -95,7 +107,7 @@ const data: MindmapData = {
       year: 2022,
       tags: ['music-generation', 'symbolic-music', 'transformer', 'controllable-generation'],
       parentGroup: 'g-music-generation',
-      position: { x: 1100, y: 420 },
+      position: { x: 1500, y: 420 },
     },
   ],
   edges: [
@@ -125,6 +137,16 @@ const data: MindmapData = {
       source: 'vq-vae',
       target: 'figaro',
     },
+    {
+      id: 'e-mdrnn-pixelrnn',
+      source: 'mdrnn',
+      target: 'pixel-rnn',
+    },
+    {
+      id: 'e-pixelrnn-vqvae',
+      source: 'pixel-rnn',
+      target: 'vq-vae',
+    },
   ],
   groups: [
     {
@@ -153,14 +175,14 @@ const data: MindmapData = {
       label: 'RNNs',
       color: '#ef4444',
       position: { x: 790, y: 350 },
-      size: { width: 240, height: 200 }, // right edge 1030 clears MDRNN (850 + 160 + 20 padding)
+      size: { width: 240, height: 370 }, // right edge 1030 clears papers (850 + 160 + 20); bottom 720 clears PixelRNN (620 + 80 + 20)
     },
     {
       id: 'g-music-generation',
       label: 'Music Generation',
       color: '#f59e0b',
-      position: { x: 1040, y: 350 },
-      size: { width: 240, height: 200 }, // right edge 1280 clears FIGARO (1100 + 160 + 20 padding)
+      position: { x: 1440, y: 350 },
+      size: { width: 240, height: 200 }, // right edge 1680 clears FIGARO (1500 + 160 + 20 padding)
     },
   ],
 };
