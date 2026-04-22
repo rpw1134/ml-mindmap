@@ -41,6 +41,17 @@
   background: var(--bg);
 }
 
+/* Edge hover + selected highlight */
+.react-flow__edge:hover .react-flow__edge-path {
+  stroke: #94a3b8 !important;
+  stroke-width: 2 !important;
+}
+
+.react-flow__edge.selected .react-flow__edge-path {
+  stroke: #f1f5f9 !important;
+  stroke-width: 2.5 !important;
+}
+
 /* ─── Paper node ──────────────────────────────────────────────── */
 
 .paper-node {
