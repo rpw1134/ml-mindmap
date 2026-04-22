@@ -74,6 +74,18 @@ const data: MindmapData = {
       position: { x: 1250, y: 150 },
     },
     {
+      id: 'mdrnn',
+      arxivId: '0705.2011',
+      title: 'Multi-Dimensional Recurrent Neural Networks',
+      authors: ['Graves', 'Fernandez', 'Schmidhuber'],
+      abstract:
+        'We propose multi-dimensional recurrent neural networks (MDRNNs), extending RNNs beyond one-dimensional sequence tasks. Where standard RNNs have proved effective for speech and online handwriting recognition, MDRNNs enable application to vision, video processing, and medical imaging without the scaling issues of other multi-dimensional models.',
+      year: 2007,
+      tags: ['rnn', 'sequence-modeling', 'multi-dimensional'],
+      parentGroup: 'g-rnns',
+      position: { x: 850, y: 420 },
+    },
+    {
       id: 'figaro',
       arxivId: '2201.10936',
       title: 'FIGARO: Generating Symbolic Music with Fine-Grained Artistic Control',
@@ -135,6 +147,13 @@ const data: MindmapData = {
       color: '#10b981',
       position: { x: 940, y: 80 },
       size: { width: 490, height: 200 }, // right edge 1430 clears VQ-VAE (1250 + 160 + 20 padding)
+    },
+    {
+      id: 'g-rnns',
+      label: 'RNNs',
+      color: '#ef4444',
+      position: { x: 790, y: 350 },
+      size: { width: 240, height: 200 }, // right edge 1030 clears MDRNN (850 + 160 + 20 padding)
     },
     {
       id: 'g-music-generation',
