@@ -126,7 +126,7 @@ export default function MindMap() {
         label: e.label,
         labelStyle: { fill: '#94a3b8', fontSize: 11 },
         labelBgStyle: { fill: '#1e293b', fillOpacity: 0.8 },
-        style: { stroke: '#475569', strokeWidth: 1.5 },
+        style: { stroke: '#64748b', strokeWidth: 1.5 },
       })),
     [],
   );
