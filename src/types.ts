@@ -16,6 +16,7 @@ export interface PaperEdge {
   source: string;
   target: string;
   label?: string;
+  relationship?: string;  // one-line summary shown on edge hover
 }
 
 export interface Group {

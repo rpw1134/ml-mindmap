@@ -6,6 +6,7 @@ import {
   MiniMap,
   BackgroundVariant,
   type Edge,
+  type EdgeMouseHandler,
 } from '@xyflow/react';
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type AnyNode = any;
@@ -22,8 +23,15 @@ const nodeTypes = {
   group: GroupNode,
 };
 
+interface EdgeTooltip {
+  text: string;
+  x: number;
+  y: number;
+}
+
 export default function MindMap() {
   const [selectedPaper, setSelectedPaper] = useState<Paper | null>(null);
+  const [edgeTooltip, setEdgeTooltip] = useState<EdgeTooltip | null>(null);
 
   const handleNodeClick = useCallback((_event: React.MouseEvent, node: AnyNode) => {
     if (node.type === 'paper') {
@@ -33,6 +41,32 @@ export default function MindMap() {
 
   const handleClose = useCallback(() => {
     setSelectedPaper(null);
+  }, []);
+
+  // Build a lookup from edge id → relationship string
+  const edgeRelationshipMap = useMemo(
+    () => new Map(mindmapData.edges.filter(e => e.relationship).map(e => [e.id, e.relationship!])),
+    [],
+  );
+
+  const handleEdgeMouseEnter: EdgeMouseHandler = useCallback(
+    (event, edge) => {
+      const text = edgeRelationshipMap.get(edge.id);
+      if (!text) return;
+      setEdgeTooltip({ text, x: event.clientX, y: event.clientY });
+    },
+    [edgeRelationshipMap],
+  );
+
+  const handleEdgeMouseMove: EdgeMouseHandler = useCallback(
+    (event) => {
+      setEdgeTooltip(prev => prev ? { ...prev, x: event.clientX, y: event.clientY } : null);
+    },
+    [],
+  );
+
+  const handleEdgeMouseLeave: EdgeMouseHandler = useCallback(() => {
+    setEdgeTooltip(null);
   }, []);
 
   // Convert group data → React Flow nodes (rendered behind paper nodes)
@@ -106,6 +140,9 @@ export default function MindMap() {
         nodesDraggable={false}
         nodesConnectable={false}
         onNodeClick={handleNodeClick}
+        onEdgeMouseEnter={handleEdgeMouseEnter}
+        onEdgeMouseMove={handleEdgeMouseMove}
+        onEdgeMouseLeave={handleEdgeMouseLeave}
         fitView
         fitViewOptions={{ padding: 0.15 }}
         colorMode="dark"
@@ -121,6 +158,15 @@ export default function MindMap() {
       </ReactFlow>
 
       <InfoPanel paper={selectedPaper} onClose={handleClose} />
+
+      {edgeTooltip && (
+        <div
+          className="edge-tooltip"
+          style={{ left: edgeTooltip.x + 14, top: edgeTooltip.y - 12 }}
+        >
+          {edgeTooltip.text}
+        </div>
+      )}
     </div>
   );
 }

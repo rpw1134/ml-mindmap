@@ -116,36 +116,43 @@ const data: MindmapData = {
       source: 'attention-is-all-you-need',
       target: 'bert',
       // label: 'inspired',  // uncomment to add a relationship label
+      relationship: 'BERT adopts the Transformer encoder architecture introduced in Attention Is All You Need.',
     },
     {
       id: 'e-attention-gpt3',
       source: 'attention-is-all-you-need',
       target: 'gpt3',
+      relationship: 'GPT-3 scales the Transformer decoder from Attention Is All You Need to 175B parameters.',
     },
     {
       id: 'e-word2vec-bert',
       source: 'word2vec',
       target: 'bert',
+      relationship: 'BERT replaces static Word2Vec embeddings with deep contextual representations.',
     },
     {
       id: 'e-vae-vqvae',
       source: 'vae',
       target: 'vq-vae',
+      relationship: 'VQ-VAE replaces the VAE\'s continuous latent space with a discrete vector-quantized codebook.',
     },
     {
       id: 'e-vqvae-figaro',
       source: 'vq-vae',
       target: 'figaro',
+      relationship: 'FIGARO uses VQ-VAE-style discrete token representations to encode musical structure.',
     },
     {
       id: 'e-mdrnn-pixelrnn',
       source: 'mdrnn',
       target: 'pixel-rnn',
+      relationship: 'Pixel RNN applies multi-dimensional recurrent processing from MDRNN to image pixel generation.',
     },
     {
       id: 'e-pixelrnn-vqvae',
       source: 'pixel-rnn',
       target: 'vq-vae',
+      relationship: 'VQ-VAE uses a PixelRNN-style autoregressive prior to learn the distribution over its discrete codes.',
     },
   ],
   groups: [
