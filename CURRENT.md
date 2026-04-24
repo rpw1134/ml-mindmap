@@ -45,7 +45,8 @@ Paper {
 
 PaperEdge {
   id, source, target         // paper ids
-  label?: string             // optional — uncomment in mindmap.ts to enable
+  label?: string             // optional edge label rendered inline
+  relationship?: string      // one-line summary shown in tooltip on edge hover
 }
 
 Group {
@@ -54,6 +55,31 @@ Group {
   size: { width, height }    // bounding box — remember: right edge = x + width
 }
 ```
+
+---
+
+## Current Papers & Groups
+
+| Group | Color | Papers |
+|---|---|---|
+| Transformers | `#7c3aed` | Attention Is All You Need, BERT |
+| Embeddings | `#0ea5e9` | Word2Vec |
+| Autoencoders | `#10b981` | VAE, VQ-VAE |
+| RNNs | `#ef4444` | MDRNN, Pixel RNN |
+| Music Generation | `#f59e0b` | FIGARO |
+| *(ungrouped)* | slate | GPT-3 |
+
+### Edge connections
+- Attention → BERT, Attention → GPT-3
+- Word2Vec → BERT
+- VAE → VQ-VAE → FIGARO
+- MDRNN → Pixel RNN → VQ-VAE
+
+### Canvas layout (approximate x zones)
+- x 140–780: Transformers (top) + Embeddings/GPT-3 (bottom)
+- x 790–1030: RNNs (tall group, two papers stacked vertically)
+- x 940–1430: Autoencoders (top row)
+- x 1440–1680: Music Generation (bottom row)
 
 ---
 
@@ -72,8 +98,13 @@ group.size.height = (bottommost paper y + ~80 + 20) - group.position.y
 ### Group Color Flow
 `Group.color` → `groupColorMap` in MindMap.tsx → `accentColor` in paper node data → `--node-accent` CSS variable on `.paper-node` → border tint + hover glow. The InfoPanel reads the color directly from `mindmapData.groups` via `parentGroup` id.
 
-### Edge Labels
-Labels are optional. In `mindmap.ts`, add `label: "cites"` to any edge entry. React Flow renders it automatically — no component changes needed.
+### Edge Hover Tooltip
+`PaperEdge.relationship` (optional string) is shown in a floating tooltip when hovering an edge. Implemented via `onEdgeMouseEnter/Move/Leave` in MindMap.tsx. The tooltip is a `position: fixed` div — no canvas coordinate math needed.
+
+### Edge Styling (three levels)
+- Default: `#64748b` stroke, 1.5px
+- Hover: `#94a3b8`, 2px (CSS override on `.react-flow__edge:hover`)
+- Selected (click): `#f1f5f9`, 2.5px (CSS override on `.react-flow__edge.selected`)
 
 ### Click Handling
 React Flow's `onNodeClick` (in MindMap.tsx) handles all node clicks. Sets `selectedPaper` state → InfoPanel renders. Closes on Escape or `×` button.

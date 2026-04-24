@@ -3,7 +3,6 @@ import {
   ReactFlow,
   Background,
   Controls,
-  MiniMap,
   BackgroundVariant,
   type Edge,
   type EdgeMouseHandler,
@@ -149,12 +148,6 @@ export default function MindMap() {
       >
         <Background variant={BackgroundVariant.Dots} gap={24} size={1} color="#334155" />
         <Controls showInteractive={false} />
-        <MiniMap
-          nodeColor={(node) =>
-            node.type === 'group' ? '#1e293b' : '#334155'
-          }
-          maskColor="rgba(0,0,0,0.4)"
-        />
       </ReactFlow>
 
       <InfoPanel paper={selectedPaper} onClose={handleClose} />
