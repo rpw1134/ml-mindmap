@@ -110,6 +110,18 @@ const data: MindmapData = {
       position: { x: 850, y: 620 },
     },
     {
+      id: 'gan',
+      arxivId: '1406.2661',
+      title: 'Generative Adversarial Networks',
+      authors: ['Goodfellow', 'Pouget-Abadie', 'Mirza', 'Xu', 'Warde-Farley', 'Ozair', 'Courville', 'Bengio'],
+      abstract:
+        'We propose a new framework for estimating generative models via an adversarial process, in which we simultaneously train two models: a generative model G that captures the data distribution, and a discriminative model D that estimates the probability that a sample came from the training data rather than G. The training procedure for G is to maximize the probability of D making a mistake. This framework corresponds to a minimax two-player game. In the space of arbitrary functions G and D, a unique solution exists, with G recovering the training data distribution and D equal to 1/2 everywhere. In the case where G and D are defined by multilayer perceptrons, the entire system can be trained with backpropagation. There is no need for any Markov chains or unrolled approximate inference networks during either training or generation of samples. Experiments demonstrate the potential of the framework through qualitative and quantitative evaluation of the generated samples.',
+      year: 2014,
+      tags: ['generative', 'adversarial', 'image-generation'],
+      parentGroup: 'g-autoencoders',
+      position: { x: 1410, y: 350 },
+    },
+    {
       id: 'figaro',
       arxivId: '2201.10936',
       title: 'FIGARO: Generating Symbolic Music with Fine-Grained Artistic Control',
@@ -153,6 +165,12 @@ const data: MindmapData = {
       source: 'vae',
       target: 'conditional-vae',
       relationship: 'Conditional VAE builds on the VAE framework by conditioning inference on an additional input, using a pretrained unconditional VAE as its foundation.',
+    },
+    {
+      id: 'e-gan-conditionalvae',
+      source: 'gan',
+      target: 'conditional-vae',
+      relationship: 'Conditional VAE is proposed as an alternative to GAN-based inpainting, outperforming GANs at representing inherent uncertainty.',
     },
     {
       id: 'e-vqvae-figaro',
