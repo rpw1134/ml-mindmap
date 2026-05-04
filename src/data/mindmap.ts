@@ -110,6 +110,17 @@ const data: MindmapData = {
       position: { x: 850, y: 620 },
     },
     {
+      id: 'pixel-cnn-plus-plus',
+      arxivId: '1701.05517',
+      title: 'PixelCNN++: Improving the PixelCNN with Discretized Logistic Mixture Likelihood and Other Modifications',
+      authors: ['Salimans', 'Karpathy', 'Chen', 'Kingma'],
+      abstract:
+        'PixelCNNs are a recently proposed class of powerful generative models with tractable likelihood that are also easy to sample from. We present a number of improvements, making training faster, sampling faster, and the likelihood lower using six changes to the architecture: we use a discretized logistic mixture likelihood on the pixels, rather than a 256-way softmax, which we find to be faster and to produce better test log-likelihoods; we condition on whole pixels, rather than R, G, and B sub-pixels, simplifying the model structure; we use downsampling to efficiently capture structure at multiple resolutions; we introduce additional short-cut connections to further speed up optimization; we regularize the model using dropout. Our model achieves state-of-the-art log-likelihood scores on CIFAR-10 and ImageNet.',
+      year: 2017,
+      tags: ['generative', 'image-generation', 'autoregressive', 'cnn'],
+      position: { x: 850, y: 820 },
+    },
+    {
       id: 'gan',
       arxivId: '1406.2661',
       title: 'Generative Adversarial Networks',
@@ -183,6 +194,12 @@ const data: MindmapData = {
       source: 'mdrnn',
       target: 'pixel-rnn',
       relationship: 'Pixel RNN applies multi-dimensional recurrent processing from MDRNN to image pixel generation.',
+    },
+    {
+      id: 'e-pixelrnn-pixelcnn',
+      source: 'pixel-rnn',
+      target: 'pixel-cnn-plus-plus',
+      relationship: 'PixelCNN++ builds on the autoregressive pixel-generation framework of PixelRNN, replacing recurrent layers with masked convolutions and improving likelihood modeling with a discretized logistic mixture.',
     },
     {
       id: 'e-pixelrnn-vqvae',
