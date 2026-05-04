@@ -118,6 +118,7 @@ const data: MindmapData = {
         'PixelCNNs are a recently proposed class of powerful generative models with tractable likelihood that are also easy to sample from. We present a number of improvements, making training faster, sampling faster, and the likelihood lower using six changes to the architecture: we use a discretized logistic mixture likelihood on the pixels, rather than a 256-way softmax, which we find to be faster and to produce better test log-likelihoods; we condition on whole pixels, rather than R, G, and B sub-pixels, simplifying the model structure; we use downsampling to efficiently capture structure at multiple resolutions; we introduce additional short-cut connections to further speed up optimization; we regularize the model using dropout. Our model achieves state-of-the-art log-likelihood scores on CIFAR-10 and ImageNet.',
       year: 2017,
       tags: ['generative', 'image-generation', 'autoregressive', 'cnn'],
+      parentGroup: 'g-cnns',
       position: { x: 850, y: 820 },
     },
     {
@@ -236,6 +237,13 @@ const data: MindmapData = {
       color: '#ef4444',
       position: { x: 790, y: 350 },
       size: { width: 240, height: 370 }, // right edge 1030 clears papers (850 + 160 + 20); bottom 720 clears PixelRNN (620 + 80 + 20)
+    },
+    {
+      id: 'g-cnns',
+      label: 'CNNs',
+      color: '#f97316',
+      position: { x: 790, y: 750 },
+      size: { width: 240, height: 200 }, // right edge 1030 clears PixelCNN++ (850+160+20); bottom 950 clears node (820+80+50)
     },
     {
       id: 'g-music-generation',
