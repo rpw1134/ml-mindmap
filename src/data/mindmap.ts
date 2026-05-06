@@ -134,6 +134,18 @@ const data: MindmapData = {
       position: { x: 1410, y: 350 },
     },
     {
+      id: 'ddpm',
+      arxivId: '2006.11239',
+      title: 'Denoising Diffusion Probabilistic Models',
+      authors: ['Ho', 'Jain', 'Abbeel'],
+      abstract:
+        'We present high quality image synthesis results using diffusion probabilistic models, a class of latent variable models inspired by considerations from nonequilibrium thermodynamics. Our best results are obtained by training on a weighted variational bound designed according to a novel connection between diffusion probabilistic models and denoising score matching with Langevin dynamics, and our models naturally admit a progressive lossy decompression scheme that can be interpreted as a generalization of autoregressive decoding. On the unconditional CIFAR 10 dataset, we obtain an Inception score of 9.46 and a state-of-the-art FID score of 3.17. On 256x256 LSUN, we obtain sample quality similar to ProgressiveGAN.',
+      year: 2020,
+      tags: ['diffusion', 'generative', 'image-generation', 'denoising', 'score-matching'],
+      parentGroup: 'g-diffusion',
+      position: { x: 1160, y: 520 },
+    },
+    {
       id: 'figaro',
       arxivId: '2201.10936',
       title: 'FIGARO: Generating Symbolic Music with Fine-Grained Artistic Control',
@@ -208,6 +220,18 @@ const data: MindmapData = {
       target: 'vq-vae',
       relationship: 'VQ-VAE uses a PixelRNN-style autoregressive prior to learn the distribution over its discrete codes.',
     },
+    {
+      id: 'e-vae-ddpm',
+      source: 'vae',
+      target: 'ddpm',
+      relationship: 'DDPM frames diffusion as a variational latent-variable model, optimizing a bound on the data likelihood analogous to the VAE ELBO.',
+    },
+    {
+      id: 'e-gan-ddpm',
+      source: 'gan',
+      target: 'ddpm',
+      relationship: 'DDPM offers a GAN-free path to high-fidelity image synthesis, matching GAN sample quality without adversarial training.',
+    },
   ],
   groups: [
     {
@@ -251,6 +275,13 @@ const data: MindmapData = {
       color: '#f59e0b',
       position: { x: 1650, y: 350 },
       size: { width: 240, height: 200 }, // right edge 1890 clears FIGARO (1710 + 160 + 20 padding)
+    },
+    {
+      id: 'g-diffusion',
+      label: 'Diffusion Models',
+      color: '#ec4899',
+      position: { x: 1100, y: 480 },
+      size: { width: 240, height: 160 }, // right edge 1340 clears DDPM (1160 + 160 + 20 padding)
     },
   ],
 };
