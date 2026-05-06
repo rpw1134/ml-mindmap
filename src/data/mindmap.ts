@@ -59,7 +59,7 @@ const data: MindmapData = {
       year: 2013,
       tags: ['vae', 'generative', 'latent-space', 'variational-inference'],
       parentGroup: 'g-autoencoders',
-      position: { x: 1160, y: 150 },
+      position: { x: 1580, y: 150 },
     },
     {
       id: 'vq-vae',
@@ -71,7 +71,7 @@ const data: MindmapData = {
       year: 2017,
       tags: ['vq-vae', 'discrete-representation', 'generative', 'codebook'],
       parentGroup: 'g-autoencoders',
-      position: { x: 1410, y: 150 },
+      position: { x: 1830, y: 150 },
     },
     {
       id: 'conditional-vae',
@@ -83,7 +83,7 @@ const data: MindmapData = {
       year: 2021,
       tags: ['vae', 'conditional-generation', 'image-inpainting', 'generative'],
       parentGroup: 'g-autoencoders',
-      position: { x: 1220, y: 350 },
+      position: { x: 1640, y: 350 },
     },
     {
       id: 'mdrnn',
@@ -95,7 +95,7 @@ const data: MindmapData = {
       year: 2007,
       tags: ['rnn', 'sequence-modeling', 'multi-dimensional'],
       parentGroup: 'g-rnns',
-      position: { x: 850, y: 420 },
+      position: { x: 1090, y: 420 },
     },
     {
       id: 'pixel-rnn',
@@ -107,7 +107,7 @@ const data: MindmapData = {
       year: 2016,
       tags: ['rnn', 'generative', 'image-generation', 'autoregressive'],
       parentGroup: 'g-rnns',
-      position: { x: 850, y: 620 },
+      position: { x: 1090, y: 620 },
     },
     {
       id: 'pixel-cnn-plus-plus',
@@ -119,7 +119,7 @@ const data: MindmapData = {
       year: 2017,
       tags: ['generative', 'image-generation', 'autoregressive', 'cnn'],
       parentGroup: 'g-cnns',
-      position: { x: 850, y: 820 },
+      position: { x: 1090, y: 920 },
     },
     {
       id: 'gan',
@@ -131,7 +131,7 @@ const data: MindmapData = {
       year: 2014,
       tags: ['generative', 'adversarial', 'image-generation'],
       parentGroup: 'g-autoencoders',
-      position: { x: 1410, y: 350 },
+      position: { x: 1830, y: 350 },
     },
     {
       id: 'ddpm',
@@ -143,7 +143,7 @@ const data: MindmapData = {
       year: 2020,
       tags: ['diffusion', 'generative', 'image-generation', 'denoising', 'score-matching'],
       parentGroup: 'g-diffusion',
-      position: { x: 1160, y: 520 },
+      position: { x: 1580, y: 620 },
     },
     {
       id: 'figaro',
@@ -155,7 +155,7 @@ const data: MindmapData = {
       year: 2022,
       tags: ['music-generation', 'symbolic-music', 'transformer', 'controllable-generation'],
       parentGroup: 'g-music-generation',
-      position: { x: 1710, y: 420 },
+      position: { x: 2320, y: 420 },
     },
   ],
   edges: [
@@ -249,39 +249,39 @@ const data: MindmapData = {
       size: { width: 240, height: 200 }, // right edge 380 clears word2vec (200 + 160 + 20 padding)
     },
     {
-      id: 'g-autoencoders',
-      label: 'Autoencoders',
-      color: '#10b981',
-      position: { x: 1100, y: 80 },
-      size: { width: 490, height: 370 }, // right edge 1590 clears VQ-VAE (1410+160+20); bottom 450 clears conditional-vae (350+80+20)
-    },
-    {
       id: 'g-rnns',
       label: 'RNNs',
       color: '#ef4444',
-      position: { x: 790, y: 350 },
-      size: { width: 240, height: 370 }, // right edge 1030 clears papers (850 + 160 + 20); bottom 720 clears PixelRNN (620 + 80 + 20)
+      position: { x: 1030, y: 350 },
+      size: { width: 240, height: 370 }, // right edge 1270 clears papers (1090 + 160 + 20); bottom 720 clears PixelRNN (620 + 80 + 20)
     },
     {
       id: 'g-cnns',
       label: 'CNNs',
       color: '#f97316',
-      position: { x: 790, y: 750 },
-      size: { width: 240, height: 200 }, // right edge 1030 clears PixelCNN++ (850+160+20); bottom 950 clears node (820+80+50)
+      position: { x: 1030, y: 850 },
+      size: { width: 240, height: 200 }, // right edge 1270 clears PixelCNN++ (1090 + 160 + 20); bottom 1050 clears node (920 + 80 + 50)
     },
     {
-      id: 'g-music-generation',
-      label: 'Music Generation',
-      color: '#f59e0b',
-      position: { x: 1650, y: 350 },
-      size: { width: 240, height: 200 }, // right edge 1890 clears FIGARO (1710 + 160 + 20 padding)
+      id: 'g-autoencoders',
+      label: 'Autoencoders',
+      color: '#10b981',
+      position: { x: 1520, y: 80 },
+      size: { width: 490, height: 370 }, // right edge 2010 clears VQ-VAE/GAN (1830 + 160 + 20); bottom 450 clears conditional-vae/gan (350 + 80 + 20)
     },
     {
       id: 'g-diffusion',
       label: 'Diffusion Models',
       color: '#ec4899',
-      position: { x: 1100, y: 480 },
-      size: { width: 240, height: 160 }, // right edge 1340 clears DDPM (1160 + 160 + 20 padding)
+      position: { x: 1520, y: 580 },
+      size: { width: 240, height: 160 }, // right edge 1760 clears DDPM (1580 + 160 + 20 padding)
+    },
+    {
+      id: 'g-music-generation',
+      label: 'Music Generation',
+      color: '#f59e0b',
+      position: { x: 2260, y: 350 },
+      size: { width: 240, height: 200 }, // right edge 2500 clears FIGARO (2320 + 160 + 20 padding)
     },
   ],
 };
