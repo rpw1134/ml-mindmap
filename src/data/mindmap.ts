@@ -122,6 +122,18 @@ const data: MindmapData = {
       position: { x: 1090, y: 920 },
     },
     {
+      id: 'unet',
+      arxivId: '1505.04597',
+      title: 'U-Net: Convolutional Networks for Biomedical Image Segmentation',
+      authors: ['Ronneberger', 'Fischer', 'Brox'],
+      abstract:
+        'There is large consent that successful training of deep networks requires many thousand annotated training samples. In this paper, we present a network and training strategy that relies on the strong use of data augmentation to use the available annotated samples more efficiently. The architecture consists of a contracting path to capture context and a symmetric expanding path that enables precise localization. We show that such a network can be trained end-to-end from very few images and outperforms the prior best method (a sliding-window convolutional network) on the ISBI challenge for segmentation of neuronal structures in electron microscopic stacks. Using the same network trained on transmitted light microscopy images (phase contrast and DIC) we won the ISBI cell tracking challenge 2015 in these categories by a large margin. Moreover, the network is fast. Segmentation of a 512x512 image takes less than a second on a recent GPU.',
+      year: 2015,
+      tags: ['cnn', 'segmentation', 'encoder-decoder', 'biomedical'],
+      parentGroup: 'g-cnns',
+      position: { x: 1090, y: 1020 },
+    },
+    {
       id: 'gan',
       arxivId: '1406.2661',
       title: 'Generative Adversarial Networks',
@@ -232,6 +244,12 @@ const data: MindmapData = {
       target: 'ddpm',
       relationship: 'DDPM offers a GAN-free path to high-fidelity image synthesis, matching GAN sample quality without adversarial training.',
     },
+    {
+      id: 'e-unet-ddpm',
+      source: 'unet',
+      target: 'ddpm',
+      relationship: 'DDPM uses a U-Net as its denoising network, leveraging the encoder-decoder architecture with skip connections to predict noise at each diffusion timestep.',
+    },
   ],
   groups: [
     {
@@ -260,7 +278,7 @@ const data: MindmapData = {
       label: 'CNNs',
       color: '#f97316',
       position: { x: 1030, y: 850 },
-      size: { width: 240, height: 200 }, // right edge 1270 clears PixelCNN++ (1090 + 160 + 20); bottom 1050 clears node (920 + 80 + 50)
+      size: { width: 240, height: 270 }, // right edge 1270 clears nodes (1090 + 160 + 20); bottom 1120 clears UNet (1020 + 80 + 20)
     },
     {
       id: 'g-autoencoders',
