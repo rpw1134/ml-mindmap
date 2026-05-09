@@ -169,6 +169,18 @@ const data: MindmapData = {
       parentGroup: 'g-music-generation',
       position: { x: 2320, y: 420 },
     },
+    {
+      id: 'classifier-free-diffusion-guidance',
+      arxivId: '2207.12598',
+      title: 'Classifier-Free Diffusion Guidance',
+      authors: ['Ho', 'Salimans'],
+      abstract:
+        'Classifier guidance is a recently introduced method to trade off mode coverage and sample fidelity in conditional diffusion models post training, in the same spirit as low temperature sampling or truncation in other types of generative models. Classifier guidance combines the score estimate of a diffusion model with the gradient of an image classifier and thereby requires training an image classifier separate from the diffusion model. It also raises the question of whether guidance can be performed without a classifier. We show that guidance can be indeed performed by a pure generative model without such a classifier: in what we call classifier-free guidance, we jointly train a conditional and an unconditional diffusion model, and we combine the resulting conditional and unconditional score estimates to attain a trade-off between sample quality and diversity similar to that obtained using classifier guidance.',
+      year: 2022,
+      tags: ['diffusion', 'generative', 'conditional-generation', 'guidance', 'classifier-free'],
+      parentGroup: 'g-diffusion',
+      position: { x: 1830, y: 620 },
+    },
   ],
   edges: [
     {
@@ -250,6 +262,12 @@ const data: MindmapData = {
       target: 'ddpm',
       relationship: 'DDPM uses a U-Net as its denoising network, leveraging the encoder-decoder architecture with skip connections to predict noise at each diffusion timestep.',
     },
+    {
+      id: 'e-ddpm-classifier-free-guidance',
+      source: 'ddpm',
+      target: 'classifier-free-diffusion-guidance',
+      relationship: 'Classifier-Free Diffusion Guidance extends DDPM by jointly training conditional and unconditional score networks, enabling high-quality conditional generation without a separate classifier.',
+    },
   ],
   groups: [
     {
@@ -292,7 +310,7 @@ const data: MindmapData = {
       label: 'Diffusion Models',
       color: '#ec4899',
       position: { x: 1520, y: 580 },
-      size: { width: 240, height: 160 }, // right edge 1760 clears DDPM (1580 + 160 + 20 padding)
+      size: { width: 490, height: 160 }, // right edge 2010 clears classifier-free (1830 + 160 + 20 padding)
     },
     {
       id: 'g-music-generation',
