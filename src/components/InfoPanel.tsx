@@ -31,6 +31,7 @@ export default function InfoPanel({ paper, onClose, showBack = false }: InfoPane
       role="dialog"
       aria-label="Paper details"
     >
+      <div className="panel__drag-handle" aria-hidden="true" />
       {showBack ? (
         <button className="info-panel__back" onClick={onClose} aria-label="Back to groups">
           ← Back
