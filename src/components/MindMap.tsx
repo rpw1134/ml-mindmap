@@ -32,7 +32,7 @@ interface EdgeTooltip {
 export default function MindMap() {
   const [selectedPaper, setSelectedPaper] = useState<Paper | null>(null);
   const [paperFromList, setPaperFromList] = useState(false);
-  const [listOpen, setListOpen] = useState(false);
+  const [listOpen, setListOpen] = useState(() => window.innerWidth <= 640);
   const [edgeTooltip, setEdgeTooltip] = useState<EdgeTooltip | null>(null);
 
   const handleNodeClick = useCallback((_event: React.MouseEvent, node: AnyNode) => {

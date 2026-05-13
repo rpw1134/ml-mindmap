@@ -9,6 +9,7 @@ interface Props {
 
 export default function GroupListPanel({ onSelectPaper, onClose }: Props) {
   const [expanded, setExpanded] = useState<Set<string>>(new Set());
+  const isMobile = window.innerWidth <= 640;
 
   const groups = mindmapData.groups ?? [];
 
@@ -34,7 +35,24 @@ export default function GroupListPanel({ onSelectPaper, onClose }: Props) {
       <div className="panel__drag-handle" aria-hidden="true" />
       <div className="list-panel__header">
         <span className="list-panel__title">Browse</span>
-        <button className="list-panel__close" onClick={onClose} aria-label="Close">×</button>
+        {isMobile ? (
+          <button className="list-panel__map-btn" onClick={onClose} aria-label="Go to map">
+            <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true">
+              <circle cx="6.5" cy="6.5" r="2" fill="currentColor"/>
+              <circle cx="1.5" cy="2"   r="1" fill="currentColor" opacity="0.5"/>
+              <circle cx="11.5" cy="2"  r="1" fill="currentColor" opacity="0.5"/>
+              <circle cx="1.5" cy="11"  r="1" fill="currentColor" opacity="0.5"/>
+              <circle cx="11.5" cy="11" r="1" fill="currentColor" opacity="0.5"/>
+              <line x1="1.5" y1="2"  x2="6.5" y2="6.5" stroke="currentColor" strokeWidth="0.8" opacity="0.4"/>
+              <line x1="11.5" y1="2" x2="6.5" y2="6.5" stroke="currentColor" strokeWidth="0.8" opacity="0.4"/>
+              <line x1="1.5" y1="11" x2="6.5" y2="6.5" stroke="currentColor" strokeWidth="0.8" opacity="0.4"/>
+              <line x1="11.5" y1="11" x2="6.5" y2="6.5" stroke="currentColor" strokeWidth="0.8" opacity="0.4"/>
+            </svg>
+            Map
+          </button>
+        ) : (
+          <button className="list-panel__close" onClick={onClose} aria-label="Close">×</button>
+        )}
       </div>
 
       <div className="list-panel__body">
