@@ -7,27 +7,70 @@
   height: 100vh;
 }
 
+/* ─── Header ──────────────────────────────────────────────────── */
+
 .app__header {
   display: flex;
-  align-items: baseline;
-  gap: 12px;
-  padding: 10px 16px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  height: 46px;
   background: var(--bg-surface);
   border-bottom: 1px solid var(--border);
   flex-shrink: 0;
   z-index: 10;
+  position: relative;
+}
+
+/* Amber gradient hairline along the bottom — the single accent moment */
+.app__header::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.app__brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.app__logo {
+  color: var(--accent);
+  flex-shrink: 0;
 }
 
 .app__title {
-  font-size: 17px;
+  font-family: var(--font-serif);
+  font-size: 20px;
   font-weight: 600;
   color: var(--text);
-  letter-spacing: 0.02em;
+  letter-spacing: 0.01em;
 }
 
-.app__subtitle {
-  font-size: 14px;
+.app__stats {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.app__stat {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
   color: var(--text-muted);
+  letter-spacing: 0.04em;
+}
+
+.app__stat-sep {
+  color: var(--text-dim);
+  font-size: 10px;
 }
 
 .app__canvas {
@@ -41,15 +84,42 @@
   background: var(--bg);
 }
 
-/* Edge hover + selected highlight */
+/* Controls panel */
+.react-flow__controls {
+  background: var(--bg-surface) !important;
+  border: 1px solid var(--border-mid) !important;
+  border-radius: 5px !important;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5) !important;
+}
+
+.react-flow__controls-button {
+  background: var(--bg-surface) !important;
+  border: none !important;
+  border-bottom: 1px solid var(--border) !important;
+  fill: var(--text-muted) !important;
+  transition: background 0.12s, fill 0.12s !important;
+}
+
+.react-flow__controls-button:last-child {
+  border-bottom: none !important;
+}
+
+.react-flow__controls-button:hover {
+  background: var(--bg-raised) !important;
+  fill: var(--text) !important;
+}
+
+/* Edge hover */
 .react-flow__edge:hover .react-flow__edge-path {
-  stroke: #94a3b8 !important;
-  stroke-width: 2 !important;
+  stroke: var(--accent) !important;
+  stroke-width: 1.5 !important;
+  opacity: 0.65 !important;
 }
 
 .react-flow__edge.selected .react-flow__edge-path {
-  stroke: #f1f5f9 !important;
-  stroke-width: 2.5 !important;
+  stroke: var(--accent) !important;
+  stroke-width: 2 !important;
 }
 
 /* ─── Edge tooltip ────────────────────────────────────────────── */
@@ -58,23 +128,24 @@
   position: fixed;
   pointer-events: none;
   z-index: 50;
-  max-width: 280px;
-  padding: 7px 11px;
+  max-width: 260px;
+  padding: 8px 12px;
   background: var(--bg-surface);
-  border: 1px solid var(--border);
-  border-radius: 6px;
+  border: 1px solid var(--border-mid);
+  border-radius: 4px;
+  font-family: var(--font-sans);
   font-size: 12px;
-  line-height: 1.5;
+  line-height: 1.65;
   color: var(--text-muted);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.55);
 }
 
 /* ─── Paper node ──────────────────────────────────────────────── */
 
 .paper-node {
   background: var(--bg-surface);
-  border: 1px solid color-mix(in srgb, var(--node-accent, #64748b) 35%, var(--border));
-  border-radius: 6px;
+  border: 1px solid color-mix(in srgb, var(--node-accent, #64748b) 30%, var(--border));
+  border-radius: 4px;
   padding: 8px 10px;
   width: 160px;
   cursor: pointer;
@@ -82,32 +153,34 @@
 }
 
 .paper-node:hover {
-  border-color: var(--node-accent, #64748b);
-  box-shadow: 0 0 0 2px color-mix(in srgb, var(--node-accent, #64748b) 20%, transparent);
+  border-color: color-mix(in srgb, var(--node-accent, #64748b) 70%, transparent);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--node-accent, #64748b) 14%, transparent);
 }
 
 .paper-node__title {
   font-size: 11px;
-  font-weight: 600;
+  font-weight: 500;
   color: var(--text);
   line-height: 1.4;
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  margin-bottom: 4px;
+  margin-bottom: 5px;
 }
 
 .paper-node__meta {
-  font-size: 10px;
+  font-family: var(--font-mono);
+  font-size: 9.5px;
   color: var(--text-muted);
+  letter-spacing: 0.02em;
 }
 
 /* ─── Group node ──────────────────────────────────────────────── */
 
 .group-node {
-  border: 1.5px dashed;
-  border-radius: 10px;
+  border: 1px solid;
+  border-radius: 8px;
   width: 100%;
   height: 100%;
   position: relative;
@@ -115,14 +188,26 @@
 
 .group-node__label {
   position: absolute;
-  top: -11px;
-  left: 12px;
-  font-size: 11px;
+  top: -10px;
+  left: 14px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-mono);
+  font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   background: var(--bg);
-  padding: 0 6px;
+  padding: 0 8px 0 5px;
+}
+
+.group-node__dot {
+  display: block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  flex-shrink: 0;
 }
 
 /* ─── Info panel ──────────────────────────────────────────────── */
@@ -134,88 +219,103 @@
   height: 100%;
   width: 360px;
   background: var(--bg-surface);
-  /* Left stripe encodes group membership — single visual anchor for color */
-  border-left: 3px solid var(--panel-accent, var(--border));
+  border-left: 1px solid var(--border);
+  box-shadow: -16px 0 48px rgba(0, 0, 0, 0.55);
   overflow: hidden;
   z-index: 20;
   display: flex;
   flex-direction: column;
-  animation: slideIn 0.2s ease-out;
+  animation: panelIn 0.24s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-@keyframes slideIn {
-  from { transform: translateX(16px); opacity: 0; }
+/* Colored top gradient bar — group membership indicator */
+.info-panel::before {
+  content: '';
+  display: block;
+  height: 3px;
+  flex-shrink: 0;
+  background: linear-gradient(90deg, var(--panel-accent, var(--border-mid)) 0%, transparent 75%);
+}
+
+@keyframes panelIn {
+  from { transform: translateX(18px); opacity: 0; }
   to   { transform: translateX(0);    opacity: 1; }
 }
 
 .info-panel__close {
   position: absolute;
-  top: 16px;
+  top: 18px;
   right: 16px;
   background: none;
-  border: none;
+  border: 1px solid var(--border-mid);
   color: var(--text-muted);
-  font-size: 20px;
+  font-family: var(--font-mono);
+  font-size: 13px;
   line-height: 1;
   cursor: pointer;
-  padding: 4px 8px;
-  border-radius: 4px;
-  transition: color 0.1s, background 0.1s;
+  padding: 4px 9px;
+  border-radius: 3px;
+  transition: color 0.12s, background 0.12s, border-color 0.12s;
 }
 
 .info-panel__close:hover {
   color: var(--text);
   background: var(--bg-raised);
+  border-color: var(--text-muted);
 }
 
-/* ── Header: meta-row → title → authors ── */
+/* ── Panel header ── */
 
 .info-panel__header {
-  padding: 32px 24px 24px;
+  padding: 24px 24px 20px;
   border-bottom: 1px solid var(--border);
 }
 
-/* Group label (colored) + year (neutral) on one compact line */
 .info-panel__meta-row {
   display: flex;
   align-items: center;
-  gap: 6px;
-  margin-bottom: 14px;
+  gap: 8px;
+  margin-bottom: 12px;
 }
 
 .info-panel__group {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--panel-accent, var(--text-muted));
 }
 
-/* Bullet separator only when group is present */
 .info-panel__group + .info-panel__year::before {
-  content: '·';
-  margin-right: 6px;
-  color: var(--text-muted);
+  content: '/';
+  margin-right: 8px;
+  color: var(--text-dim);
+  font-family: var(--font-mono);
 }
 
 .info-panel__year {
-  font-size: 12px;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
   color: var(--text-muted);
-  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
 }
 
-/* Title is the hero — largest, most prominent element */
 .info-panel__title {
-  font-size: 20px;
-  font-weight: 700;
+  font-family: var(--font-serif);
+  font-size: 23px;
+  font-weight: 600;
   color: var(--text);
-  line-height: 1.35;
-  margin: 0 0 12px;
+  line-height: 1.3;
+  margin: 0 0 13px;
   letter-spacing: -0.01em;
+  padding-right: 28px;
 }
 
 .info-panel__authors {
-  font-size: 13px;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 13.5px;
   color: var(--text-muted);
   line-height: 1.5;
 }
@@ -225,26 +325,26 @@
 .info-panel__tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
-  padding: 18px 24px;
+  gap: 5px;
+  padding: 14px 24px;
   border-bottom: 1px solid var(--border);
 }
 
 .info-panel__tag {
-  font-size: 11px;
-  font-weight: 500;
-  padding: 3px 10px;
-  border-radius: 100px;
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  padding: 3px 8px;
+  border-radius: 2px;
   background: var(--bg-raised);
   color: var(--text-muted);
-  border: 1px solid var(--border);
-  letter-spacing: 0.01em;
+  border: 1px solid var(--border-mid);
+  letter-spacing: 0.05em;
 }
 
 /* ── Abstract ── */
 
 .info-panel__section {
-  padding: 24px 24px 24px;
+  padding: 18px 24px 24px;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -253,26 +353,37 @@
   min-height: 0;
 }
 
+.info-panel__section::-webkit-scrollbar {
+  width: 3px;
+}
+.info-panel__section::-webkit-scrollbar-track {
+  background: transparent;
+}
+.info-panel__section::-webkit-scrollbar-thumb {
+  background: var(--border-mid);
+  border-radius: 2px;
+}
+
 .info-panel__section-label {
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--text-muted);
-  opacity: 0.6;
+  color: var(--text-dim);
 }
 
 .info-panel__abstract {
   font-size: 13px;
   color: var(--text-muted);
-  line-height: 1.75;
+  line-height: 1.85;
   margin: 0;
 }
 
 /* ── Footer ── */
 
 .info-panel__footer {
-  padding: 20px 24px;
+  padding: 14px 24px;
   border-top: 1px solid var(--border);
   flex-shrink: 0;
 }
@@ -280,14 +391,16 @@
 .info-panel__link {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
-  font-size: 13px;
+  gap: 5px;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
   font-weight: 500;
-  color: #818cf8;
+  letter-spacing: 0.06em;
+  color: var(--accent);
   text-decoration: none;
-  transition: color 0.1s;
+  transition: opacity 0.12s;
 }
 
 .info-panel__link:hover {
-  color: #a5b4fc;
+  opacity: 0.7;
 }

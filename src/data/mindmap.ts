@@ -386,56 +386,56 @@ const data: MindmapData = {
     {
       id: 'g-transformers',
       label: 'Transformers',
-      color: '#7c3aed',
+      color: '#a87ee0',
       position: { x: 140, y: 80 },
       size: { width: 640, height: 200 }, // right edge 780 clears BERT (600 + 160 + 20 padding)
     },
     {
       id: 'g-embeddings',
       label: 'Embeddings',
-      color: '#0ea5e9',
+      color: '#44b4d8',
       position: { x: 140, y: 350 },
       size: { width: 240, height: 200 }, // right edge 380 clears word2vec (200 + 160 + 20 padding)
     },
     {
       id: 'g-rnns',
       label: 'RNNs',
-      color: '#ef4444',
+      color: '#d46060',
       position: { x: 1030, y: 350 },
       size: { width: 240, height: 370 }, // right edge 1270 clears papers (1090 + 160 + 20); bottom 720 clears PixelRNN (620 + 80 + 20)
     },
     {
       id: 'g-cnns',
       label: 'CNNs',
-      color: '#f97316',
+      color: '#d88c42',
       position: { x: 1030, y: 850 },
       size: { width: 490, height: 270 }, // right edge 1520 clears AlexNet/ResNet (1340 + 160 + 20); bottom 1120 clears UNet/ResNet (1020 + 80 + 20)
     },
     {
       id: 'g-autoencoders',
       label: 'Autoencoders',
-      color: '#10b981',
+      color: '#38c08a',
       position: { x: 1600, y: 80 },
       size: { width: 490, height: 370 }, // right edge 2090 clears VQ-VAE/GAN (1910 + 160 + 20); bottom 450 clears conditional-vae/gan (350 + 80 + 20)
     },
     {
       id: 'g-diffusion',
       label: 'Diffusion Models',
-      color: '#ec4899',
+      color: '#d458a0',
       position: { x: 1600, y: 580 },
       size: { width: 490, height: 270 }, // right edge 2090 clears classifier-free (1910 + 160 + 20); bottom 850 clears LDM (750 + 80 + 20)
     },
     {
       id: 'g-music-generation',
       label: 'Music Generation',
-      color: '#f59e0b',
+      color: '#d8aa2a',
       position: { x: 2260, y: 350 },
       size: { width: 240, height: 200 }, // right edge 2500 clears FIGARO (2320 + 160 + 20 padding)
     },
     {
       id: 'g-vision-language',
       label: 'Vision-Language',
-      color: '#6366f1',
+      color: '#7080d8',
       position: { x: 2260, y: 630 },
       size: { width: 240, height: 200 }, // right edge 2500 clears CLIP (2320 + 160 + 20 padding); bottom 830 clears CLIP (700 + 80 + 20 + some)
     },

@@ -1,21 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=JetBrains+Mono:wght@400;500&display=swap');
+
 *, *::before, *::after {
   box-sizing: border-box;
 }
 
 :root {
-  --bg: #0f172a;
-  --bg-surface: #1e293b;
-  --bg-raised: #334155;
-  --border: #334155;
-  --text: #e2e8f0;
-  --text-muted: #94a3b8;
-  --accent: #7c3aed;
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --bg:          #0c0b09;
+  --bg-surface:  #131210;
+  --bg-raised:   #1c1915;
+  --border:      #272220;
+  --border-mid:  #332e29;
 
-  font: 14px/1.5 var(--sans);
+  --text:        #ede4d3;
+  --text-muted:  #a8998a;
+  --text-dim:    #3d3528;
+
+  --accent:      #c8965a;
+  --accent-glow: rgba(200, 150, 90, 0.15);
+
+  --font-serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --font-sans:  'DM Sans', system-ui, sans-serif;
+  --font-mono:  'JetBrains Mono', 'Fira Mono', monospace;
+
+  font: 14px/1.5 var(--font-sans);
   color: var(--text);
   background: var(--bg);
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
