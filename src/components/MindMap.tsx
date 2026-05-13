@@ -29,11 +29,15 @@ interface EdgeTooltip {
   y: number;
 }
 
+const PANEL_ANIM_MS = 200;
+
 export default function MindMap() {
   const [selectedPaper, setSelectedPaper] = useState<Paper | null>(null);
   const [paperFromList, setPaperFromList] = useState(false);
   const [listOpen, setListOpen] = useState(() => window.innerWidth <= 640);
   const [edgeTooltip, setEdgeTooltip] = useState<EdgeTooltip | null>(null);
+  const [listClosing, setListClosing] = useState(false);
+  const [paperClosing, setPaperClosing] = useState(false);
 
   const handleNodeClick = useCallback((_event: React.MouseEvent, node: AnyNode) => {
     if (node.type === 'paper') {
@@ -47,15 +51,36 @@ export default function MindMap() {
     setPaperFromList(true);
   }, []);
 
-  const handlePaperClose = useCallback(() => {
-    setSelectedPaper(null);
-    setPaperFromList(false);
-    // listOpen stays as-is — if opened from list, list reappears automatically
+  const startClosingPaper = useCallback((closeListToo = false) => {
+    setPaperClosing(true);
+    setTimeout(() => {
+      setSelectedPaper(null);
+      setPaperFromList(false);
+      setPaperClosing(false);
+      if (closeListToo) setListOpen(false);
+    }, PANEL_ANIM_MS);
   }, []);
 
-  const handleListClose = useCallback(() => {
-    setListOpen(false);
+  const startClosingList = useCallback(() => {
+    setListClosing(true);
+    setTimeout(() => {
+      setListOpen(false);
+      setListClosing(false);
+    }, PANEL_ANIM_MS);
   }, []);
+
+  const handlePaperClose = useCallback(() => {
+    startClosingPaper(false);
+  }, [startClosingPaper]);
+
+  const handleListClose = useCallback(() => {
+    startClosingList();
+  }, [startClosingList]);
+
+  const handlePaneClick = useCallback(() => {
+    if (selectedPaper) startClosingPaper(true);
+    else if (listOpen) startClosingList();
+  }, [selectedPaper, listOpen, startClosingPaper, startClosingList]);
 
   const edgeRelationshipMap = useMemo(
     () => new Map(mindmapData.edges.filter(e => e.relationship).map(e => [e.id, e.relationship!])),
@@ -141,7 +166,7 @@ export default function MindMap() {
   );
 
   const showHamburger = !listOpen && !selectedPaper;
-  const showList = listOpen && !selectedPaper;
+  const showList = (listOpen || listClosing) && !selectedPaper && !paperClosing;
 
   return (
     <div style={{ width: '100%', height: '100%', position: 'relative' }}>
@@ -152,6 +177,7 @@ export default function MindMap() {
         nodesDraggable={false}
         nodesConnectable={false}
         onNodeClick={handleNodeClick}
+        onPaneClick={handlePaneClick}
         onEdgeMouseEnter={handleEdgeMouseEnter}
         onEdgeMouseMove={handleEdgeMouseMove}
         onEdgeMouseLeave={handleEdgeMouseLeave}
@@ -178,10 +204,10 @@ export default function MindMap() {
       )}
 
       {showList && (
-        <GroupListPanel onSelectPaper={handleSelectFromList} onClose={handleListClose} />
+        <GroupListPanel onSelectPaper={handleSelectFromList} onClose={handleListClose} closing={listClosing} />
       )}
 
-      <InfoPanel paper={selectedPaper} onClose={handlePaperClose} showBack={paperFromList} />
+      <InfoPanel paper={selectedPaper} onClose={handlePaperClose} showBack={paperFromList} closing={paperClosing} />
 
       {edgeTooltip && (
         <div

@@ -6,9 +6,10 @@ interface InfoPanelProps {
   paper: Paper | null;
   onClose: () => void;
   showBack?: boolean;
+  closing?: boolean;
 }
 
-export default function InfoPanel({ paper, onClose, showBack = false }: InfoPanelProps) {
+export default function InfoPanel({ paper, onClose, showBack = false, closing = false }: InfoPanelProps) {
   useEffect(() => {
     function handleKey(e: KeyboardEvent) {
       if (e.key === 'Escape') onClose();
@@ -26,7 +27,7 @@ export default function InfoPanel({ paper, onClose, showBack = false }: InfoPane
 
   return (
     <div
-      className="info-panel"
+      className={`info-panel${closing ? ' info-panel--closing' : ''}`}
       style={{ '--panel-accent': parentGroup?.color ?? 'var(--border)' } as React.CSSProperties}
       role="dialog"
       aria-label="Paper details"

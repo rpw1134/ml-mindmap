@@ -5,9 +5,10 @@ import mindmapData from '../data/mindmap';
 interface Props {
   onSelectPaper: (paper: Paper) => void;
   onClose: () => void;
+  closing?: boolean;
 }
 
-export default function GroupListPanel({ onSelectPaper, onClose }: Props) {
+export default function GroupListPanel({ onSelectPaper, onClose, closing = false }: Props) {
   const [expanded, setExpanded] = useState<Set<string>>(new Set());
   const isMobile = window.innerWidth <= 640;
 
@@ -31,7 +32,7 @@ export default function GroupListPanel({ onSelectPaper, onClose }: Props) {
   };
 
   return (
-    <div className="list-panel" role="dialog" aria-label="Browse groups">
+    <div className={`list-panel${closing ? ' list-panel--closing' : ''}`} role="dialog" aria-label="Browse groups">
       <div className="panel__drag-handle" aria-hidden="true" />
       <div className="list-panel__header">
         <span className="list-panel__title">Browse</span>

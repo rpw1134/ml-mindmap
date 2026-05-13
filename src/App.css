@@ -440,6 +440,16 @@
   to   { transform: translateX(0);    opacity: 1; }
 }
 
+@keyframes panelOut {
+  from { transform: translateX(0);    opacity: 1; }
+  to   { transform: translateX(18px); opacity: 0; }
+}
+
+.info-panel--closing,
+.list-panel--closing {
+  animation: panelOut 0.2s cubic-bezier(0.4, 0, 1, 1) forwards;
+}
+
 .info-panel__back {
   position: absolute;
   top: 18px;
@@ -727,5 +737,15 @@
   @keyframes panelInMobile {
     from { transform: translateY(20px); opacity: 0; }
     to   { transform: translateY(0);    opacity: 1; }
+  }
+
+  @keyframes panelOutMobile {
+    from { transform: translateY(0);    opacity: 1; }
+    to   { transform: translateY(20px); opacity: 0; }
+  }
+
+  .info-panel--closing,
+  .list-panel--closing {
+    animation: panelOutMobile 0.2s cubic-bezier(0.4, 0, 1, 1) forwards;
   }
 }
