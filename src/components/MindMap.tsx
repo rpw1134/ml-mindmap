@@ -16,6 +16,7 @@ import mindmapData from '../data/mindmap';
 import PaperNode from './PaperNode';
 import GroupNode from './GroupNode';
 import InfoPanel from './InfoPanel';
+import GroupListPanel from './GroupListPanel';
 
 const nodeTypes = {
   paper: PaperNode,
@@ -30,19 +31,32 @@ interface EdgeTooltip {
 
 export default function MindMap() {
   const [selectedPaper, setSelectedPaper] = useState<Paper | null>(null);
+  const [paperFromList, setPaperFromList] = useState(false);
+  const [listOpen, setListOpen] = useState(false);
   const [edgeTooltip, setEdgeTooltip] = useState<EdgeTooltip | null>(null);
 
   const handleNodeClick = useCallback((_event: React.MouseEvent, node: AnyNode) => {
     if (node.type === 'paper') {
       setSelectedPaper(node.data as Paper);
+      setPaperFromList(false);
     }
   }, []);
 
-  const handleClose = useCallback(() => {
-    setSelectedPaper(null);
+  const handleSelectFromList = useCallback((paper: Paper) => {
+    setSelectedPaper(paper);
+    setPaperFromList(true);
   }, []);
 
-  // Build a lookup from edge id → relationship string
+  const handlePaperClose = useCallback(() => {
+    setSelectedPaper(null);
+    setPaperFromList(false);
+    // listOpen stays as-is — if opened from list, list reappears automatically
+  }, []);
+
+  const handleListClose = useCallback(() => {
+    setListOpen(false);
+  }, []);
+
   const edgeRelationshipMap = useMemo(
     () => new Map(mindmapData.edges.filter(e => e.relationship).map(e => [e.id, e.relationship!])),
     [],
@@ -68,7 +82,6 @@ export default function MindMap() {
     setEdgeTooltip(null);
   }, []);
 
-  // Convert group data → React Flow nodes (rendered behind paper nodes)
   const groupNodes: AnyNode[] = useMemo(
     () =>
       (mindmapData.groups ?? []).map((g) => ({
@@ -84,15 +97,13 @@ export default function MindMap() {
     [],
   );
 
-  // Build a lookup from group id → color for fast access in paper nodes
   const groupColorMap = useMemo(
     () => new Map((mindmapData.groups ?? []).map((g) => [g.id, g.color])),
     [],
   );
 
-  const DEFAULT_NODE_COLOR = '#64748b'; // slate-500 for ungrouped papers
+  const DEFAULT_NODE_COLOR = '#5a5248';
 
-  // Convert paper data → React Flow nodes
   const paperNodes: AnyNode[] = useMemo(
     () =>
       mindmapData.papers.map((p) => ({
@@ -115,7 +126,6 @@ export default function MindMap() {
     [groupNodes, paperNodes],
   );
 
-  // Convert edge data → React Flow edges
   const edges: Edge[] = useMemo(
     () =>
       mindmapData.edges.map((e) => ({
@@ -129,6 +139,9 @@ export default function MindMap() {
       })),
     [],
   );
+
+  const showHamburger = !listOpen && !selectedPaper;
+  const showList = listOpen && !selectedPaper;
 
   return (
     <div style={{ width: '100%', height: '100%', position: 'relative' }}>
@@ -150,7 +163,25 @@ export default function MindMap() {
         <Controls showInteractive={false} />
       </ReactFlow>
 
-      <InfoPanel paper={selectedPaper} onClose={handleClose} />
+      {showHamburger && (
+        <button
+          className="hamburger"
+          onClick={() => setListOpen(true)}
+          aria-label="Browse groups"
+        >
+          <svg width="15" height="11" viewBox="0 0 15 11" fill="none" aria-hidden="true">
+            <rect y="0"   width="15" height="1.5" rx="0.75" fill="currentColor"/>
+            <rect y="4.75" width="15" height="1.5" rx="0.75" fill="currentColor"/>
+            <rect y="9.5" width="15" height="1.5" rx="0.75" fill="currentColor"/>
+          </svg>
+        </button>
+      )}
+
+      {showList && (
+        <GroupListPanel onSelectPaper={handleSelectFromList} onClose={handleListClose} />
+      )}
+
+      <InfoPanel paper={selectedPaper} onClose={handlePaperClose} showBack={paperFromList} />
 
       {edgeTooltip && (
         <div

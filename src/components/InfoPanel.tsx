@@ -5,9 +5,10 @@ import mindmapData from '../data/mindmap';
 interface InfoPanelProps {
   paper: Paper | null;
   onClose: () => void;
+  showBack?: boolean;
 }
 
-export default function InfoPanel({ paper, onClose }: InfoPanelProps) {
+export default function InfoPanel({ paper, onClose, showBack = false }: InfoPanelProps) {
   useEffect(() => {
     function handleKey(e: KeyboardEvent) {
       if (e.key === 'Escape') onClose();
@@ -30,12 +31,17 @@ export default function InfoPanel({ paper, onClose }: InfoPanelProps) {
       role="dialog"
       aria-label="Paper details"
     >
-      <button className="info-panel__close" onClick={onClose} aria-label="Close">
-        ×
-      </button>
+      {showBack ? (
+        <button className="info-panel__back" onClick={onClose} aria-label="Back to groups">
+          ← Back
+        </button>
+      ) : (
+        <button className="info-panel__close" onClick={onClose} aria-label="Close">
+          ×
+        </button>
+      )}
 
       <div className="info-panel__header">
-        {/* Compact metadata line: group (colored) · year (neutral) */}
         <div className="info-panel__meta-row">
           {parentGroup && (
             <span className="info-panel__group">{parentGroup.label}</span>
@@ -43,7 +49,6 @@ export default function InfoPanel({ paper, onClose }: InfoPanelProps) {
           <span className="info-panel__year">{paper.year}</span>
         </div>
 
-        {/* Title is the hero */}
         <h2 className="info-panel__title">{paper.title}</h2>
         <div className="info-panel__authors">{paper.authors.join(', ')}</div>
       </div>
