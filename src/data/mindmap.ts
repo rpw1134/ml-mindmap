@@ -35,7 +35,8 @@ const data: MindmapData = {
         'Recent work has demonstrated substantial gains on many NLP tasks and benchmarks by pre-training on a large corpus of text followed by fine-tuning on a specific task. While typically task-agnostic in architecture, this method still requires task-specific fine-tuning datasets of thousands or tens of thousands of examples. By contrast, humans can generally perform a new language task from only a few examples or from simple instructions - something which current NLP systems still largely struggle to do. Here we show that scaling up language models greatly improves task-agnostic, few-shot performance, sometimes even reaching competitiveness with prior state-of-the-art fine-tuning approaches. Specifically, we train GPT-3, an autoregressive language model with 175 billion parameters, 10x more than any previous non-sparse language model, and test its performance in the few-shot setting. For all tasks, GPT-3 is applied without any gradient updates or fine-tuning, with tasks and few-shot demonstrations specified purely via text interaction with the model. GPT-3 achieves strong performance on many NLP datasets, including translation, question-answering, and cloze tasks, as well as several tasks that require on-the-fly reasoning or domain adaptation, such as unscrambling words, using a novel word in a sentence, or performing 3-digit arithmetic.',
       year: 2020,
       tags: ['pretraining', 'transformer', 'scaling', 'nlp'],
-      position: { x: 600, y: 420 },
+      parentGroup: 'g-transformers',
+      position: { x: 400, y: 280 },
     },
     {
       id: 'word2vec',
@@ -47,7 +48,7 @@ const data: MindmapData = {
       year: 2013,
       tags: ['embeddings', 'nlp', 'word2vec'],
       parentGroup: 'g-embeddings',
-      position: { x: 200, y: 420 },
+      position: { x: 200, y: 530 },
     },
     {
       id: 'vae',
@@ -388,14 +389,14 @@ const data: MindmapData = {
       label: 'Transformers',
       color: '#a87ee0',
       position: { x: 140, y: 80 },
-      size: { width: 640, height: 200 }, // right edge 780 clears BERT (600 + 160 + 20 padding)
+      size: { width: 640, height: 300 }, // right edge 780 clears BERT (600+160+20); bottom 380 clears GPT-3 (280+80+20)
     },
     {
       id: 'g-embeddings',
       label: 'Embeddings',
       color: '#44b4d8',
-      position: { x: 140, y: 350 },
-      size: { width: 240, height: 200 }, // right edge 380 clears word2vec (200 + 160 + 20 padding)
+      position: { x: 140, y: 460 },
+      size: { width: 240, height: 200 }, // right edge 380 clears word2vec (200+160+20); bottom 660 clears word2vec (530+80+20) -- moved down from 350 to clear transformers group
     },
     {
       id: 'g-rnns',
